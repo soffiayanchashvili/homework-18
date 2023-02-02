@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="content"></div>
+    <script>
+         const parentDiv = document.getElementById('content')
+            setTimeout(() => {
+            const div = document.createElement('p')
+            parentDiv.appendChild(div)
+        }, 3000)
+
+        fetch('http://jsonplaceholder.typicode.com/users').then(
+           (response) => {
+            return response.json()
+           }
+        ).then(
+            (data)=> {
+                const userData = data
+                for (let index = 0; index < userData.length; index++) {
+                    const element = userData[index];
+                    const email = document.createElement('p')
+                    const username = document.createElement('p')
+                    const phone = document.createElement('p')
+                    const website = document.createElement('p')
+
+                    email.textContent = element.email
+                    username.textContent = element.username
+                    phone.textContent = element.phone
+                    website.textContent = element.website
+
+                    parentDiv.appendChild(email)
+                    parentDiv.appendChild(username)
+                    parentDiv.appendChild(phone)
+                    parentDiv.appendChild(website)
+
+                }
+            }
+        ).catch((error) => {
+            console.log (error, `this is error`)
+        })
+    </script>
+</body>
+</html> 
